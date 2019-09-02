@@ -1,0 +1,126 @@
+/* 
+    Teletext stylesheet 
+    Galax 2014-2015 http://galax.xyz
+    
+    MODE7GX3.TTF font by Galax 2014 - based on ModeSeven, created in 1998 by Andrew Bulhak
+*/
+
+/* Hard reset */
+html,body,div,span,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,
+address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,
+sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,
+tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,
+footer,header,hgroup,menu,nav,output,section,summary,time,audio,video {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+}
+
+/* 
+    Teletext palette 
+    000000 0 black
+    ff0000 1 red
+    00ff00 2 green
+    ffff00 3 yellow
+    0000ff 4 blue
+    ff00ff 5 magenta
+    00ffff 6 cyan
+    ffffff 7 white
+*/
+
+
+a {
+    text-decoration: none;
+}
+
+/* unvisited link */
+a:link {
+    color: #00ffff;
+}
+
+/* visited link */
+a:visited {
+    color: #00ff00;
+}
+
+/* mouse over link */
+a:hover {
+    color: #ffff00;
+}
+a.yellow:hover, .yellow a:hover {
+    color: #00ff00;
+}
+
+/* selected link */
+a:active {
+    color: #ff0000;
+}
+a.yellow:active, .yellow a:active {
+    color: #ff0000;
+}
+a.red:active, .red a:active {
+    color: #ffff00;
+}
+
+/* flashing class, it's like the 'blink' tag is back */
+.flashing {
+    animation: flashing 1.3s steps(5, start) infinite;
+    -webkit-animation: flashing 1.3s steps(5, start) infinite;
+}
+@keyframes flashing { to { visibility: hidden; } }
+@-webkit-keyframes flashing { to { visibility: hidden; } }
+
+/* concealed text is initially hidden, reveal by modifying class */
+.conceal { opacity: 0; }
+
+.colour0, .black,   a.black,   .black a    {color: #000000;}
+.colour1, .red,     a.red,     .red  a       {color: #ff0000;}
+.colour2, .green,   a.green,   .green  a   {color: #00ff00;}
+.colour3, .yellow,  a.yellow,  .yellow a  {color: #ffff00;}
+.colour4, .blue,    a.blue,    .blue a      {color: #0000ff;}
+.colour5, .magenta, a.magenta, .magenta a{color: #ff00ff;}
+.colour6, .cyan,    a.cyan,    .cyan  a     {color: #00ffff;}
+.colour7, .white,   a.white,   .white  a   {color: #ffffff;}
+
+.colour0bg, .blackbg     {background-color: #000000;}
+.colour1bg, .redbg         {background-color: #ff0000;}
+.colour2bg, .greenbg     {background-color: #00ff00;}
+.colour3bg, .yellowbg   {background-color: #ffff00;}
+.colour4bg, .bluebg       {background-color: #0000ff;}
+.colour5bg, .magentabg {background-color: #ff00ff;}
+.colour6bg, .cyanbg       {background-color: #00ffff;}
+.colour7bg, .whitebg     {background-color: #ffffff;}
+
+@font-face {
+    font-family: Mode7;
+    src: url('MODE7GX3.TTF'), url('MODE7GX3.EOT');  /* .EOT is for IE */
+}
+
+body, td.teletext {
+    font-family: Mode7, monospace, courier, fixed;
+    font-size: 20px;
+    font-smooth: never;
+    -webkit-font-smoothing : none;
+    color: #ffffff;
+    background: #000000;
+    line-height: 20px;
+}
+
+body {
+    border-width: 20px 20px 20px 20px; /* t r b l */
+    padding: 20px;
+}
+
+.teletext {
+    text-align: left;
+    white-space: pre;
+    display: block;
+    font-size: 28px;
+    line-height:28px;
+    font-smooth: never;
+    -webkit-font-smoothing : none;
+}
+
+/* http://www.galax.xyz/TELETEXT/INDEX.HTM */

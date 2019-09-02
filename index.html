@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <title>Teletext</title>
+  <link rel="stylesheet" href="teletext.css">
+  <style>
+    .sep {
+      line-height: 120%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+
+    <table>
+      <tr>
+        <td class="teletext">
+          <div class="teletext">
+            &#xE2C0;P{{ paddedPageStr }} <span class="green blackbg">         {{ date }}</span>&#xE2C0; 
+            <span class="yellow bluebg"> Hacker News in the style of Teletext  </span>&#xE2C0;
+            <span class="yellow bluebg"> Type the number of the page to go to  </span>&#xE2C0;&#xE2C0;
+            <span v-if="page === 100">
+              <span class="teletext">
+                &#xE2C0;
+                <span class="yellow blackbg">&#xe048;&#xe041;&#xe043;&#xe04b;&#xe045;&#xe052;&#xe020;&#xe04e;&#xe045;&#xe057;&#xe053;</span>&#xE2C0;
+                <span class="yellow blackbg">&#xe148;&#xe141;&#xe143;&#xe14b;&#xe145;&#xe152;&#xe120;&#xe14e;&#xe145;&#xe157;&#xe153;</span>
+              </span>
+              &#xE2C0;
+              <span class="white greenbg">101-105</span> <span class="white">News Index</span>&#xE2C0;
+              &#xE2C0;
+              <span class="white greenbg">200-249</span> <span class="white">News Stories</span>&#xE2C0;
+              &#xE2C0;
+            </span>
+
+            <span v-if="page>100 && page <= 105">
+            &#xE2C0;
+            <span v-for="story,id in subsetOfStories">
+            <span class="white greenbg">{{ id }}</span> <span class="yellow">{{ story.title.substr(0,35) }}</span>&#xE2C0;
+            </span>
+                &#xE2C0;
+                <span v-if="page > 101"><span class="white greenbg">{{page - 1}}</span> Previous</span>
+                <span v-if="page < 105"><span class="white greenbg">{{page + 1}}</span> Next</span>
+            </span>
+
+            <span v-if="page>=200 && page<250 && story">
+            &#xE2C0;
+            <span class="blue yellowbg">{{ story.title.substr(0,38) }}</span>&#xE2C0;
+            <span v-if="story.title.length > 38">
+            <span class="blue yellowbg">{{ story.title.substr(38,38) }}</span>&#xE2C0;
+            </span>
+            &#xE2C0;
+             <span class="green">{{ new Date(story.time*1000).toISOString()}}</span>&#xE2C0;
+             &#xE2C0;
+             <span v-if="story.text">
+             <span class="white">{{ story.text.substr(0,36)}} </span>&#xE2C0;
+             </span>
+             <span v-if="story.text && story.text.length > 36">
+             <span class="white">{{ story.text.substr(36,36)}} </span>&#xE2C0;
+             </span>
+             <span v-if="story.text && story.text.length > 72">
+             <span class="white">{{ story.text.substr(72,36)}} </span>&#xE2C0;
+             </span>
+             <span v-if="story.text && story.text.length > 108">
+             <span class="white">{{ story.text.substr(108,36)}} </span>&#xE2C0;
+             </span>
+             <span v-if="story.text && story.text.length > 144">
+             <span class="white">{{ story.text.substr(144,36)}} </span>&#xE2C0;
+             </span>
+             <span v-if="story.text && story.text.length > 180">
+             <span class="white">{{ story.text.substr(180,36)}} </span>&#xE2C0;
+             </span>
+             <span v-if="story.url" class="white"><a v-bind:href="story.url" target="_new">{{ story.shorturl.substr(0,35) }} ===></a>&#xE2C0;</span>
+       
+             &#xE2C0;
+            &#xE2C0;
+            <span v-if="page > 200"><span class="white greenbg">{{page - 1}}</span> Previous</span>
+            <span v-if="page < 250"><span class="white greenbg">{{page + 1}}</span> Next</span>
+
+            </span>
+<!--
+            <span
+              class="red">&#xE2C0;&#xE2C0;&#xE2C0;&#xE2E0;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2DF;&#xE2C1;</span>
+            &#xE2C0;<span
+              class="magenta">&#xE2C0;&#xE2C0;&#xE2C0;&#xE2FA;&#xE2FF;&#xE2C5;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2E0;&#xE2FE;&#xE2FF;&#xE2C7;&#xE2C0;&#xE2C0;</span>
+            &#xE2C0;<span
+              class="magenta">&#xE2C0;&#xE2C0;&#xE2E8;&#xE2FF;&#xE2D7;&#xE2E0;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2C1;&#xE2E0;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2C0;&#xE2C0;&#xE2E0;&#xE2FF;&#xE2FF;&#xE2C1;&#xE2E0;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2C0;&#xE2C2;&#xE2EF;&#xE2FF;&#xE2FD;&#xE2F0;&#xE2F8;&#xE2FF;&#xE2DF;&#xE2C1;&#xE2C0;&#xE2C0;&#xE2C0;</span>
+            &#xE2C0;<span
+              class="red">&#xE2C0;&#xE2C0;&#xE2FE;&#xE2FF;&#xE2C1;&#xE2C0;&#xE2E0;&#xE2FF;&#xE2D7;&#xE2C0;&#xE2FA;&#xE2FF;&#xE2C1;&#xE2EA;&#xE2FF;&#xE2C0;&#xE2C0;&#xE2FA;&#xE2FF;&#xE2C5;&#xE2C0;&#xE2FA;&#xE2FF;&#xE2C1;&#xE2EA;&#xE2FF;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2CB;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2C7;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;</span>
+            &#xE2C0;<span
+              class="magenta">&#xE2C0;&#xE2E8;&#xE2FF;&#xE2F7;&#xE2F0;&#xE2F0;&#xE2FE;&#xE2FF;&#xE2C5;&#xE2E0;&#xE2FF;&#xE2DF;&#xE2CF;&#xE2FF;&#xE2FF;&#xE2C0;&#xE2E0;&#xE2FF;&#xE2DF;&#xE2C0;&#xE2E0;&#xE2FF;&#xE2DF;&#xE2CF;&#xE2FF;&#xE2FF;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2F8;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FD;&#xE2D0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;</span>
+            &#xE2C0;<span
+              class="magenta">&#xE2C0;&#xE2CF;&#xE2CF;&#xE2CF;&#xE2CF;&#xE2CF;&#xE2CF;&#xE2CF;&#xE2C0;&#xE2CE;&#xE2CF;&#xE2C0;&#xE2C0;&#xE2CF;&#xE2CF;&#xE2C0;&#xE2FA;&#xE2FF;&#xE2C5;&#xE2C0;&#xE2CE;&#xE2CF;&#xE2C0;&#xE2C0;&#xE2CF;&#xE2CF;&#xE2C0;&#xE2E0;&#xE2FE;&#xE2FF;&#xE2C7;&#xE2C0;&#xE2CB;&#xE2CF;&#xE2CF;&#xE2C4;&#xE2C0;&#xE2C0;&#xE2C0;</span>
+            &#xE2C0;<span
+              class="magenta">&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2E0;&#xE2FF;&#xE2FF;&#xE2F0;&#xE2F0;&#xE2F0;&#xE2F0;&#xE2F0;&#xE2F0;&#xE2F0;&#xE2F0;&#xE2F8;&#xE2FF;&#xE2DF;&#xE2C1;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;</span>
+            &#xE2C0;<span
+              class="magenta">&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C2;&#xE2C3;&#xE2C3;&#xE2C3;&#xE2C3;&#xE2C3;&#xE2C3;&#xE2C3;&#xE2C3;&#xE2C3;&#xE2C3;&#xE2C3;&#xE2C3;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;</span>
+            &#xE2C0;
+            &#xE2C0; <span class="red">No images are used on this page!</span>
+            &#xE2C0;
+            &#xE2C0;This page uses a TrueType font to show
+            &#xE2C0;Teletext text and graphics. If it does
+            &#xE2C0;not display correctly, try <a href="STATIC.HTM">this version
+              &#xE2C0;with static images</a>.
+            &#xE2C0;
+            &#xE2C0;You can use this font to create
+            &#xE2C0;authentic looking Teletext web pages.
+            &#xE2C0;
+            &#xE2C0;<span class="bluebg yellow "> Teletext font by <a href="mailto:3d@galax.xyz"
+                class="yellow">3d@galax.xyz</a> 2014 </span>
+            &#xE2C0; <a href="http://galax.xyz" class="red">Home</a> 
+            -->
+          
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <!-- development version, includes helpful console warnings -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="he.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
