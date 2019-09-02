@@ -118,7 +118,7 @@ const startup = async function() {
     if (!cachedStory) {
       story = await loadStory(stories[i])
       if (story.text) {
-        story.text = he.decode(story.text).replace(/<[^>]*>?/gm, '')
+        story.text = he.decode(story.text).replace(/<[^>]*>?/gm, '').replace(/↵/g,' ')
       } else {
         story.text = ''
       }
