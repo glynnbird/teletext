@@ -19,7 +19,18 @@ var app = new Vue({
   },
   created() {
     window.addEventListener('keydown', (e) => {
-      if (e.keyCode>=48 && e.keyCode <=58) {
+      console.log(e.keyCode)
+      if (e.keyCode === 39 || e.keyCode === 38) {
+        app.page = ++app.page % 1000
+        app.pageStr = app.page.toString()
+        console.log(app.page)
+      } else if (e.keyCode === 37 || e.keyCode === 40) {
+        app.page = --app.page % 1000
+        if (app.page === -1) {
+          app.page = 999
+        }
+        app.pageStr = app.page.toString()
+      } else if (e.keyCode>=48 && e.keyCode <=58) {
         if (app.pageStr.length === 3) {
           app.pageStr = ''
         }
