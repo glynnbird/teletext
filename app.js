@@ -7,6 +7,7 @@ var app = new Vue({
     page: 100,
     date: '',
     time: '',
+    progress: 0,
     stories: {},
     subsetOfStories: {},
     story: {}
@@ -31,8 +32,6 @@ var app = new Vue({
         if (app.pageStr.length > 0) {
           app.pageStr = app.pageStr.substr(0,app.pageStr.length - 1)
         }
-      } else {
-        console.log('could not find', e)
       }
     });
   },
@@ -84,7 +83,6 @@ const loadStory = async function(id) {
 
 const startup = async function() {
   const stories = await loadStories()
-  console.log(stories)
   let id = 200
   for(var i in stories) {
     const story = await loadStory(stories[i])
@@ -98,8 +96,9 @@ const startup = async function() {
       story.shorturl = u.hostname 
     }
     app.stories[id] = story
+    app.progress++
     id++
-    if (id >= 250) {
+    if (id >= 300) {
       break
     }
   }

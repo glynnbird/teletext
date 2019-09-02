@@ -30,23 +30,24 @@
                 <span class="yellow blackbg">&#xe148;&#xe141;&#xe143;&#xe14b;&#xe145;&#xe152;&#xe120;&#xe14e;&#xe145;&#xe157;&#xe153;</span>
               </span>
               &#xE2C0;
-              <span class="white greenbg">101-105</span> <span class="white">News Index</span>&#xE2C0;
+              <span class="white greenbg">101-110</span> <span class="white">News Index</span>&#xE2C0;
               &#xE2C0;
-              <span class="white greenbg">200-249</span> <span class="white">News Stories</span>&#xE2C0;
+              <span class="white greenbg">200-299</span> <span class="white">News Stories</span>&#xE2C0;
               &#xE2C0;
+              <span class="blue whitebg" v-if="progress < 100">Loading {{ progress}} / 100</span>
             </span>
 
-            <span v-if="page>100 && page <= 105">
+            <span v-if="page>100 && page <= 110">
             &#xE2C0;
             <span v-for="story,id in subsetOfStories">
-            <span class="white greenbg">{{ id }}</span> <span class="yellow">{{ story.title.substr(0,35) }}</span>&#xE2C0;
+              <span class="white greenbg">{{ id }}</span> <span class="yellow" v-if="story">{{ story.title.substr(0,35) }}</span>&#xE2C0;   
             </span>
                 &#xE2C0;
                 <span v-if="page > 101"><span class="white greenbg">{{page - 1}}</span> Previous</span>
-                <span v-if="page < 105"><span class="white greenbg">{{page + 1}}</span> Next</span>
+                <span v-if="page < 110"><span class="white greenbg">{{page + 1}}</span> Next</span>
             </span>
 
-            <span v-if="page>=200 && page<250 && story">
+            <span v-if="page>=200 && page<300 && story">
             &#xE2C0;
             <span class="blue yellowbg">{{ story.title.substr(0,38) }}</span>&#xE2C0;
             <span v-if="story.title.length > 38">
@@ -78,7 +79,7 @@
              &#xE2C0;
             &#xE2C0;
             <span v-if="page > 200"><span class="white greenbg">{{page - 1}}</span> Previous</span>
-            <span v-if="page < 250"><span class="white greenbg">{{page + 1}}</span> Next</span>
+            <span v-if="page < 299"><span class="white greenbg">{{page + 1}}</span> Next</span>
 
             </span>
 <!--
