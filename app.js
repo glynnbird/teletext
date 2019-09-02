@@ -18,8 +18,7 @@ var app = new Vue({
     }
   },
   created() {
-    window.addEventListener('keydown', (e) => {
-      console.log(e.keyCode)
+    window.addEventListener('keydown', async (e) => {
       if (e.keyCode === 39 || e.keyCode === 38) {
         app.page = ++app.page % 1000
         app.pageStr = app.page.toString()
@@ -43,6 +42,18 @@ var app = new Vue({
         if (app.pageStr.length > 0) {
           app.pageStr = app.pageStr.substr(0,app.pageStr.length - 1)
         }
+      }
+      console.log(app.page, app.progress)
+      if (app.page === 999 && app.progress === 100) {
+        await db.destroy().then( function() {
+          db = new PouchDB('teletext')
+          startup()
+          setTimeout(function() {
+            app.page = 100
+            app.pageStr = '100'
+            console.log('switcheroo')
+          },1000)
+        })
       }
     });
   },
@@ -93,6 +104,7 @@ const loadStory = async function(id) {
 }
 
 const startup = async function() {
+  app.progress = 0
   const stories = await loadStories()
   let id = 200
   for(var i in stories) {

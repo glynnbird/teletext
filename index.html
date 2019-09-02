@@ -34,8 +34,10 @@
               &#xE2C0;
               <span class="white greenbg">200-299</span> <span class="white">News Stories</span>&#xE2C0;
               &#xE2C0;
-              <span class="blue whitebg" v-if="progress < 100">Loading {{ progress}} / 100</span>
             </span>
+ 
+            
+
 
             <span v-if="page>100 && page <= 110">
             &#xE2C0;
@@ -81,7 +83,15 @@
             <span v-if="page > 200"><span class="white greenbg">{{page - 1}}</span> Previous</span>
             <span v-if="page < 299"><span class="white greenbg">{{page + 1}}</span> Next</span>
 
+
             </span>
+
+            <span v-if="page === 999">
+              <span class="white redbg">Deleted cache</span>
+            </span>
+            &#xE2C0;
+            &#xE2C0;
+            <span class="blue whitebg" v-if="progress < 100">Loading {{ progress}} / 100</span>
 <!--
             <span
               class="red">&#xE2C0;&#xE2C0;&#xE2C0;&#xE2E0;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2DF;&#xE2C1;</span>
