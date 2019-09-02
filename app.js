@@ -1,4 +1,4 @@
-
+var db = new PouchDB('teletext');
 
 var app = new Vue({
   el: '#app',
@@ -85,15 +85,29 @@ const startup = async function() {
   const stories = await loadStories()
   let id = 200
   for(var i in stories) {
-    const story = await loadStory(stories[i])
-    if (story.text) {
-      story.text = he.decode(story.text).replace(/<[^>]*>?/gm, '')
-    } else {
-      story.text = ''
+    let cachedStory = null
+    let story = null
+    try {
+      cachedStory = await db.get(stories[i].toString())
+    } catch(e) {
+
     }
-    if (story.url) {
-      const u = new URL(story.url)
-      story.shorturl = u.hostname 
+    if (!cachedStory) {
+      story = await loadStory(stories[i])
+      if (story.text) {
+        story.text = he.decode(story.text).replace(/<[^>]*>?/gm, '')
+      } else {
+        story.text = ''
+      }
+      if (story.url) {
+        const u = new URL(story.url)
+        story.shorturl = u.hostname 
+      }
+      story._id = story.id.toString()
+      delete story.id
+      await db.put(story)
+    } else {
+      story = cachedStory
     }
     app.stories[id] = story
     app.progress++
