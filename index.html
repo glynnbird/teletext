@@ -6,19 +6,11 @@
   <meta content="text/html; charset=UTF-8" http-equiv="content-type">
   <title>Teletext</title>
   <link rel="stylesheet" href="teletext.css">
-  <style>
-    .sep {
-      line-height: 120%;
-    }
-  </style>
 </head>
 
 <body>
   <div id="app">
 
-    <table>
-      <tr>
-        <td class="teletext">
           <div class="teletext">
             &#xE2C0;P{{ paddedPageStr }} <span class="green blackbg">         {{ date }}</span>&#xE2C0; 
             <span class="yellow bluebg"> Hacker News in the style of Teletext  </span>&#xE2C0;
@@ -33,6 +25,9 @@
               <span class="white greenbg">101-110</span> <span class="white">News Index</span>&#xE2C0;
               &#xE2C0;
               <span class="white greenbg">200-299</span> <span class="white">News Stories</span>&#xE2C0;
+              &#xE2C0;
+              &#xE2C0;
+              &#xE2C0;
               &#xE2C0;
             </span>
  
@@ -80,6 +75,8 @@
        
              &#xE2C0;
             &#xE2C0;
+            &#xE2C0;
+            &#xE2C0;
             <span v-if="page > 200"><span class="white greenbg">{{page - 1}}</span> Previous</span>
             <span v-if="page < 299"><span class="white greenbg">{{page + 1}}</span> Next</span>
 
@@ -92,43 +89,13 @@
             &#xE2C0;
             &#xE2C0;
             <span class="blue whitebg" v-if="progress < 100">Loading {{ progress}} / 100</span>
-<!--
-            <span
-              class="red">&#xE2C0;&#xE2C0;&#xE2C0;&#xE2E0;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2DF;&#xE2C1;</span>
-            &#xE2C0;<span
-              class="magenta">&#xE2C0;&#xE2C0;&#xE2C0;&#xE2FA;&#xE2FF;&#xE2C5;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2E0;&#xE2FE;&#xE2FF;&#xE2C7;&#xE2C0;&#xE2C0;</span>
-            &#xE2C0;<span
-              class="magenta">&#xE2C0;&#xE2C0;&#xE2E8;&#xE2FF;&#xE2D7;&#xE2E0;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2C1;&#xE2E0;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2C0;&#xE2C0;&#xE2E0;&#xE2FF;&#xE2FF;&#xE2C1;&#xE2E0;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2C0;&#xE2C2;&#xE2EF;&#xE2FF;&#xE2FD;&#xE2F0;&#xE2F8;&#xE2FF;&#xE2DF;&#xE2C1;&#xE2C0;&#xE2C0;&#xE2C0;</span>
-            &#xE2C0;<span
-              class="red">&#xE2C0;&#xE2C0;&#xE2FE;&#xE2FF;&#xE2C1;&#xE2C0;&#xE2E0;&#xE2FF;&#xE2D7;&#xE2C0;&#xE2FA;&#xE2FF;&#xE2C1;&#xE2EA;&#xE2FF;&#xE2C0;&#xE2C0;&#xE2FA;&#xE2FF;&#xE2C5;&#xE2C0;&#xE2FA;&#xE2FF;&#xE2C1;&#xE2EA;&#xE2FF;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2CB;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2C7;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;</span>
-            &#xE2C0;<span
-              class="magenta">&#xE2C0;&#xE2E8;&#xE2FF;&#xE2F7;&#xE2F0;&#xE2F0;&#xE2FE;&#xE2FF;&#xE2C5;&#xE2E0;&#xE2FF;&#xE2DF;&#xE2CF;&#xE2FF;&#xE2FF;&#xE2C0;&#xE2E0;&#xE2FF;&#xE2DF;&#xE2C0;&#xE2E0;&#xE2FF;&#xE2DF;&#xE2CF;&#xE2FF;&#xE2FF;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2F8;&#xE2FF;&#xE2FF;&#xE2FF;&#xE2FD;&#xE2D0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;</span>
-            &#xE2C0;<span
-              class="magenta">&#xE2C0;&#xE2CF;&#xE2CF;&#xE2CF;&#xE2CF;&#xE2CF;&#xE2CF;&#xE2CF;&#xE2C0;&#xE2CE;&#xE2CF;&#xE2C0;&#xE2C0;&#xE2CF;&#xE2CF;&#xE2C0;&#xE2FA;&#xE2FF;&#xE2C5;&#xE2C0;&#xE2CE;&#xE2CF;&#xE2C0;&#xE2C0;&#xE2CF;&#xE2CF;&#xE2C0;&#xE2E0;&#xE2FE;&#xE2FF;&#xE2C7;&#xE2C0;&#xE2CB;&#xE2CF;&#xE2CF;&#xE2C4;&#xE2C0;&#xE2C0;&#xE2C0;</span>
-            &#xE2C0;<span
-              class="magenta">&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2E0;&#xE2FF;&#xE2FF;&#xE2F0;&#xE2F0;&#xE2F0;&#xE2F0;&#xE2F0;&#xE2F0;&#xE2F0;&#xE2F0;&#xE2F8;&#xE2FF;&#xE2DF;&#xE2C1;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;</span>
-            &#xE2C0;<span
-              class="magenta">&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C2;&#xE2C3;&#xE2C3;&#xE2C3;&#xE2C3;&#xE2C3;&#xE2C3;&#xE2C3;&#xE2C3;&#xE2C3;&#xE2C3;&#xE2C3;&#xE2C3;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;&#xE2C0;</span>
+
             &#xE2C0;
-            &#xE2C0; <span class="red">No images are used on this page!</span>
-            &#xE2C0;
-            &#xE2C0;This page uses a TrueType font to show
-            &#xE2C0;Teletext text and graphics. If it does
-            &#xE2C0;not display correctly, try <a href="STATIC.HTM">this version
-              &#xE2C0;with static images</a>.
-            &#xE2C0;
-            &#xE2C0;You can use this font to create
-            &#xE2C0;authentic looking Teletext web pages.
-            &#xE2C0;
-            &#xE2C0;<span class="bluebg yellow "> Teletext font by <a href="mailto:3d@galax.xyz"
-                class="yellow">3d@galax.xyz</a> 2014 </span>
-            &#xE2C0; <a href="http://galax.xyz" class="red">Home</a> 
-            -->
+            <span class="yellow bluebg"><a href="https://github.com/glynnbird/teletext" target="_new"> https://github.com/glynnbird/teletext </a></span>&#xE2C0
+
           
           </div>
-        </td>
-      </tr>
-    </table>
+
   </div>
   <!-- development version, includes helpful console warnings -->
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
