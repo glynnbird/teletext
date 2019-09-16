@@ -50,6 +50,8 @@
             <span v-if="story.title.length > 38">
             <span class="blue yellowbg">{{ story.title.substr(38,38) }}</span>&#xE2C0;
             </span>
+            <span v-if="story.title.length <= 38">&#xE2C0;
+            </span>
             &#xE2C0;
              <span class="green">{{ new Date(story.time*1000).toISOString()}}</span>&#xE2C0;
              &#xE2C0;
