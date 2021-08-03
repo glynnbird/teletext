@@ -28,7 +28,8 @@ var app = new Vue({
           app.page = 999
         }
         app.pageStr = app.page.toString()
-      } else if (e.keyCode>=48 && e.keyCode <=58) {
+      } else if ((e.keyCode>=48 && e.keyCode <=57) || 
+          (e.keyCode>=96 && e.keyCode <=105)) {
         if (app.pageStr.length === 3) {
           app.pageStr = ''
         }
