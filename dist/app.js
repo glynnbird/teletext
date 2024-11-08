@@ -80,7 +80,7 @@ const formatDate = function() {
   const d = new Date()
   app.date = d.toISOString()
 }
-setInterval(formatDate, 1000)
+//setInterval(formatDate, 1000)
 
 const fetchURL = async function(url) {
   return new Promise((resolve, reject) => {
