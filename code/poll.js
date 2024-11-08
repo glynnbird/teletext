@@ -1,7 +1,7 @@
 import fxp from 'fast-xml-parser'
 import { stripHtml } from 'string-strip-html'
 import { okResponse } from './lib/constants.js'
-import { mustBePOST, mustBeJSON, apiKey, handleCORS } from './lib/checks.js'
+import { handleCORS } from './lib/checks.js'
 
 const options = {
   ignoreAttributes: false,

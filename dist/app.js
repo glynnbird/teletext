@@ -1,4 +1,4 @@
-var db = new PouchDB('teletext');
+//var db = new PouchDB('teletext');
 
 var app = new Vue({
   el: '#app',
@@ -43,14 +43,14 @@ var app = new Vue({
         }
       }
       if (app.page === 999 && app.progress === 100) {
-        await db.destroy().then( function() {
+       /* await db.destroy().then( function() {
           db = new PouchDB('teletext')
           startup()
           setTimeout(function() {
             app.page = 100
             app.pageStr = '100'
           },1000)
-        })
+        })*/
       }
     });
   },
