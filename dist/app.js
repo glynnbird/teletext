@@ -80,7 +80,7 @@ const formatDate = function() {
   const d = new Date()
   app.date = d.toISOString()
 }
-//setInterval(formatDate, 1000)
+setInterval(formatDate, 1000)
 
 const fetchURL = async function(url) {
   return new Promise((resolve, reject) => {
@@ -104,6 +104,7 @@ const startup = async function() {
     story = stories.feed[i]
     story.text = story.title
     story.url = story.link
+    story.time = new Date(story.pubDate).getTime()
     app.stories[id] = story
     app.progress++
     id++
