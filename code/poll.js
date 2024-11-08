@@ -39,10 +39,6 @@ export async function onRequest(context) {
       i.media = i['media:content'][l - 1]['@_url']
     }
     i.pubDate = new Date(i.pubDate).toISOString()
-    // if the publication date is in the future, then move it midnight today
-    if (i.pubDate > now) {
-      i.pubDate = midnight
-    }
     delete i['media:thumbnail']
     delete i['media:content']
     delete i['dc:creator']
