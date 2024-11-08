@@ -104,8 +104,8 @@ const startup = async function() {
     story = stories.feed[i]
     story.text = story.title
     story.url = story.link
-    story.shorturl = story.link
-    story.time = new Date(story.pubDate).getTime()
+    story.shorturl = story.link.substr(0, 20)
+    story.time = story.pubDate
     app.stories[id] = story
     app.progress++
     id++
