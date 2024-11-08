@@ -11,7 +11,7 @@ const parser = new fxp.XMLParser(options)
 
 export async function onRequest(context) {
   // handle POST/JSON/apikey chcecks
-  const r = handleCORS(context.request) || apiKey(context.request, context.env) || mustBePOST(context.request) || mustBeJSON(context.request)
+  const r = handleCORS(context.request) 
   if (r) return r
 
   // load the URL
