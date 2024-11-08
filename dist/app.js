@@ -96,42 +96,14 @@ const loadStories = async function() {
   return fetchURL(u)
 }
 
-const loadStory = async function(id) {
-  const url = 'https://hacker-news.firebaseio.com/v0/item/' + id + '.json'
-  return fetchURL(url)
-}
-
 const startup = async function() {
   app.progress = 0
   const stories = await loadStories()
-  console.log(stories)
-  return
   let id = 200
-  for(var i in stories) {
-    let cachedStory = null
-    let story = null
-    try {
-      cachedStory = await db.get(stories[i].toString())
-    } catch(e) {
-
-    }
-    if (!cachedStory) {
-      story = await loadStory(stories[i])
-      if (story.text) {
-        story.text = he.decode(story.text).replace(/<[^>]*>?/gm, '').replace(/↵/g,' ')
-      } else {
-        story.text = ''
-      }
-      if (story.url) {
-        const u = new URL(story.url)
-        story.shorturl = u.hostname 
-      }
-      story._id = story.id.toString()
-      delete story.id
-      await db.put(story)
-    } else {
-      story = cachedStory
-    }
+  for(var i in stories.feed) {
+    story = stories.feed[i]
+    story.text = story.title
+    story.url = story.link
     app.stories[id] = story
     app.progress++
     id++
