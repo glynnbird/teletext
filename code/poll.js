@@ -17,7 +17,7 @@ export async function onRequest(context) {
   // load the URL
   let response
   response = await fetch('https://feeds.bbci.co.uk/news/uk/rss.xml')
-  const content = await r.text()
+  const content = await response.text()
 
   // parse the feed
   let items = parser.parse(content).rss.channel.item
