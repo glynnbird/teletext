@@ -1,0 +1,20 @@
+{
+  "name": "transposer-code",
+  "version": "1.0.0",
+  "description": "Workers code",
+  "scripts": {
+    "build": "./build.sh"
+  },
+  "author": "Glynn Bird <glynn.bird@gmail.com>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.1",
+    "@rollup/plugin-node-resolve": "^15.3.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "rollup": "^4.22.4"
+  },
+  "dependencies": {
+    "fast-xml-parser": "^4.5.0",
+    "string-strip-html": "^13.4.8"
+  }
+}

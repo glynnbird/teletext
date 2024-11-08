@@ -92,7 +92,8 @@ const fetchURL = async function(url) {
   })
 }
 const loadStories = async function() {
-  return fetchURL('https://hacker-news.firebaseio.com/v0/topstories.json')
+  const u = window.location.origin + '/api/poll'
+  return fetchURL(u)
 }
 
 const loadStory = async function(id) {
@@ -103,6 +104,8 @@ const loadStory = async function(id) {
 const startup = async function() {
   app.progress = 0
   const stories = await loadStories()
+  console.log(stories)
+  return
   let id = 200
   for(var i in stories) {
     let cachedStory = null
