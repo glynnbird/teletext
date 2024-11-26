@@ -12,13 +12,11 @@ var app = new Vue({
     subsetOfStories: {},
     story: {}
   },
-  computed: {
-    paddedPageStr: function() {
-      return this.pageStr.padEnd(3, '_')
-    }
-  },
-  created() {
-    window.addEventListener('keydown', async (e) => {
+  methods: {
+    goto: (page) => {
+      app.pageStr = page
+    },
+    key: async (e) => {
       if (e.keyCode === 39 || e.keyCode === 38) {
         app.page = ++app.page % 1000
         app.pageStr = app.page.toString()
@@ -42,16 +40,16 @@ var app = new Vue({
           app.pageStr = app.pageStr.substr(0,app.pageStr.length - 1)
         }
       }
-      if (app.page === 999 && app.progress === 100) {
-       /* await db.destroy().then( function() {
-          db = new PouchDB('teletext')
-          startup()
-          setTimeout(function() {
-            app.page = 100
-            app.pageStr = '100'
-          },1000)
-        })*/
-      }
+    }
+  },
+  computed: {
+    paddedPageStr: function() {
+      return this.pageStr.padEnd(3, '_')
+    }
+  },
+  created() {
+    window.addEventListener('keydown', async (e) => {
+      app.key(e)
     });
   },
   watch: {
