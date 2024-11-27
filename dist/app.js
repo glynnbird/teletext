@@ -116,7 +116,7 @@ var app = new Vue({
 
 const formatDate = function() {
   const d = new Date()
-  app.date = d.toISOString()
+  app.date = d.toISOString().substring(0,19).replace('T',' ')
 }
 setInterval(formatDate, 1000)
 
