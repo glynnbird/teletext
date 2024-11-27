@@ -14,92 +14,89 @@
 <body>
   <div id="app">
 
-          <div class="teletext">
-            &#xE2C0;P{{ paddedPageStr }} <span class="green blackbg">         {{ date }}</span>&#xE2C0; 
-            <span class="yellow bluebg"> News in the style of Teletext  </span>&#xE2C0;
-            <span class="yellow bluebg"> Type the number of the page to go to  </span>&#xE2C0;&#xE2C0;
-            <span v-if="page === 100">
-              <span class="teletext">
-                &#xE2C0;
-                <span class="yellow blackbg">&#xe048;&#xe041;&#xe043;&#xe04b;&#xe045;&#xe052;&#xe020;&#xe04e;&#xe045;&#xe057;&#xe053;</span>&#xE2C0;
-                <span class="yellow blackbg">&#xe148;&#xe141;&#xe143;&#xe14b;&#xe145;&#xe152;&#xe120;&#xe14e;&#xe145;&#xe157;&#xe153;</span>
-              </span>
-              &#xE2C0;
-              <span class="white greenbg" @click="app.goto('100')">100 </span> <span class="white">News Index</span>&#xE2C0;
-              &#xE2C0;
-              <span class="white greenbg" @click="app.goto('200')">200+</span> <span class="white">News Stories</span>&#xE2C0;
-              &#xE2C0;
-              &#xE2C0;
-              &#xE2C0;
-              &#xE2C0;
-            </span>
- 
-            
+<div class="teletext">
+  &#xE2C0;P{{ paddedPageStr }} <span class="green blackbg">         {{ date }}</span>&#xE2C0; 
+  <span class="yellow bluebg"> News in the style of Teletext         </span>&#xE2C0;
+  <span class="yellow bluebg"> Type the number of the page to go to  </span>&#xE2C0;&#xE2C0;
+  <span v-if="page === 100">
+    <span class="teletext">
+      &#xE2C0;
+      <span class="yellow blackbg">&#xe048;&#xe041;&#xe043;&#xe04b;&#xe045;&#xe052;&#xe020;&#xe04e;&#xe045;&#xe057;&#xe053;</span>&#xE2C0;
+      <span class="yellow blackbg">&#xe148;&#xe141;&#xe143;&#xe14b;&#xe145;&#xe152;&#xe120;&#xe14e;&#xe145;&#xe157;&#xe153;</span>
+    </span>
+    &#xE2C0;
+    <a href="JavaScript:app.goto('101')" class="white greenbg">101 </a> <span class="white">News Index</span>&#xE2C0;
+    &#xE2C0;
+    <a href="JavaScript:app.goto('200')" class="white greenbg">200+</a> <span class="white">News Stories</span>&#xE2C0;
+    &#xE2C0;
+    &#xE2C0;
+    &#xE2C0;
+    &#xE2C0;
+  </span>
+
+  
 
 
-            <span v-if="page>100 && page <= 110">
-            &#xE2C0;
-            <span v-for="story,id in subsetOfStories">
-              <span class="white greenbg">{{ id }}</span> <span class="yellow" v-if="story">{{ story.title.substr(0,35) }}</span>&#xE2C0;   
-            </span>
-                &#xE2C0;
-                <span v-if="page > 101"><span class="white greenbg">{{page - 1}}</span> Previous</span>
-                <span v-if="page < 110"><span class="white greenbg">{{page + 1}}</span> Next</span>
-            </span>
+  <span v-if="page>100 && page <= 110">
+  &#xE2C0;
+  <span v-for="story,id in subsetOfStories">
+    <span class="white greenbg">{{ id }}</span> <span class="yellow" v-if="story">{{ story.title.substr(0,35) }}</span>&#xE2C0;   
+  </span>
+      &#xE2C0;
+      <span v-if="page > 101"><a href="JavaScript:app.previous()" class="white greenbg">{{page - 1}}</a> Previous</span>
+      <span v-if="page < 110"><a href="JavaScript:app.next()" class="white greenbg">{{page + 1}}</a> Next</span>
+  </span>
 
-            <span v-if="page>=200 && page<300 && story">
-            &#xE2C0;
-            <span class="blue yellowbg">{{ story.title.substr(0,38) }}</span>&#xE2C0;
-            <span v-if="story.title.length > 38">
-            <span class="blue yellowbg">{{ story.title.substr(38,38) }}</span>&#xE2C0;
-            </span>
-            <span v-if="story.title.length <= 38">&#xE2C0;
-            </span>
-            &#xE2C0;
-             <span class="green">{{ story.time }}</span>&#xE2C0;
-             &#xE2C0;
-             <span v-if="story.text">
-             <span class="white">{{ story.text.substr(0,36)}} </span>&#xE2C0;
-             </span>
-             <span v-if="story.text && story.text.length > 36">
-             <span class="white">{{ story.text.substr(36,36)}} </span>&#xE2C0;
-             </span>
-             <span v-if="story.text && story.text.length > 72">
-             <span class="white">{{ story.text.substr(72,36)}} </span>&#xE2C0;
-             </span>
-             <span v-if="story.text && story.text.length > 108">
-             <span class="white">{{ story.text.substr(108,36)}} </span>&#xE2C0;
-             </span>
-             <span v-if="story.text && story.text.length > 144">
-             <span class="white">{{ story.text.substr(144,36)}} </span>&#xE2C0;
-             </span>
-             <span v-if="story.text && story.text.length > 180">
-             <span class="white">{{ story.text.substr(180,36)}} </span>&#xE2C0;
-             </span>
-             <span v-if="story.url" class="white"><a v-bind:href="story.url" target="_new">{{ story.shorturl.substr(0,35) }} ===></a>&#xE2C0;</span>
-       
-             &#xE2C0;
-            &#xE2C0;
-            &#xE2C0;
-            &#xE2C0;
-            <span v-if="page > 200"><span class="white greenbg">{{page - 1}}</span> Previous</span>
-            <span v-if="page < 299"><span class="white greenbg">{{page + 1}}</span> Next</span>
+  <span v-if="page>=200 && page<300 && story">
+  &#xE2C0;
+  <span class="blue yellowbg">{{ story.title.substr(0,38) }}</span>&#xE2C0;
+  <span v-if="story.title.length > 38">
+  <span class="blue yellowbg">{{ story.title.substr(38,38) }}</span>&#xE2C0;
+  </span>
+  <span v-if="story.title.length <= 38">&#xE2C0;
+  </span>
+  &#xE2C0;
+    <span class="green">{{ story.time }}</span>&#xE2C0;
+    &#xE2C0;
+    <span v-if="story.text">
+    <span class="white">{{ story.text.substr(0,36)}} </span>&#xE2C0;
+    </span>
+    <span v-if="story.text && story.text.length > 36">
+    <span class="white">{{ story.text.substr(36,36)}} </span>&#xE2C0;
+    </span>
+    <span v-if="story.text && story.text.length > 72">
+    <span class="white">{{ story.text.substr(72,36)}} </span>&#xE2C0;
+    </span>
+    <span v-if="story.text && story.text.length > 108">
+    <span class="white">{{ story.text.substr(108,36)}} </span>&#xE2C0;
+    </span>
+    <span v-if="story.text && story.text.length > 144">
+    <span class="white">{{ story.text.substr(144,36)}} </span>&#xE2C0;
+    </span>
+    <span v-if="story.text && story.text.length > 180">
+    <span class="white">{{ story.text.substr(180,36)}} </span>&#xE2C0;
+    </span>
+    <span v-if="story.url" class="white"><a v-bind:href="story.url" target="_new">{{ story.shorturl.substr(0,35) }} ===></a>&#xE2C0;</span>
+
+    &#xE2C0;
+  &#xE2C0;
+  &#xE2C0;
+  &#xE2C0;
+  <span v-if="page > 200"><span class="white greenbg">{{page - 1}}</span> Previous</span>
+  <span v-if="page < 299"><span class="white greenbg">{{page + 1}}</span> Next</span>
 
 
-            </span>
+  </span>
 
-            <span v-if="page === 999">
-              <span class="white redbg">Deleted cache</span>
-            </span>
-            &#xE2C0;
-            &#xE2C0;
-            <span class="blue whitebg" v-if="progress < 15">Loading {{ progress}}</span>
+  &#xE2C0;
+  &#xE2C0;
+  <span class="blue whitebg" v-if="progress < 15">Loading {{ progress}}</span>
 
-            &#xE2C0;
-            <span class="yellow bluebg"><a href="https://github.com/glynnbird/teletext" target="_new"> https://github.com/glynnbird/teletext </a></span>&#xE2C0
+  &#xE2C0;
+  <span class="yellow bluebg"><a href="https://github.com/glynnbird/teletext" target="_new"> https://github.com/glynnbird/teletext </a></span>&#xE2C0
 
-          
-          </div>
+
+</div>
 
   </div>
   <!-- development version, includes helpful console warnings -->
