@@ -37,13 +37,14 @@
 
   <span v-if="page>100 && page <= 110">
   &#xE2C0;
-  <span v-for="story,id in subsetOfStories">
-    <a v-bind:href="'JavaScript:app.goto(' + id + ')'" class="white greenbg">{{ id }}</a> <span class="yellow" v-if="story">{{ story.title.substr(0,35) }}</span>&#xE2C0;   
+  <span v-for="story in subsetOfStories">
+    <a v-bind:href="'JavaScript:app.goto(' + story.id + ')'" class="white greenbg">{{ story.id }}</a> <span class="yellow" v-if="story">{{ story.title.substr(0,35) }}</span>&#xE2C0;   
   </span>
       &#xE2C0;
       <span v-if="page > 101"><a href="JavaScript:app.previous()" class="white greenbg">{{page - 1}}</a> Previous</span>
       <span v-if="page < 110"><a href="JavaScript:app.next()" class="white greenbg">{{page + 1}}</a> Next</span>
   </span>
+  
 
   <span v-if="page>=200 && page<300 && story">
   &#xE2C0;

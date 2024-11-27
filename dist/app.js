@@ -1,15 +1,12 @@
 //var db = new PouchDB('teletext');
 
 var justify = function(str, len) {
-
   var re = RegExp("(?:\\s|^)(.{1," + len + "})(?=\\s|$)", "g");
   var res = [];
   var finalResult = [];
-
   while ((m = re.exec(str)) !== null) {
     res.push(m[1]);
   }
-
   for (var i = 0; i < res.length - 1; i++){    
     if(res[i].indexOf(' ') != -1){  
       while(res[i].length < len){      
@@ -24,9 +21,7 @@ var justify = function(str, len) {
     }    
     finalResult.push(res[i]);    
   }
-
   finalResult.push(res[res.length - 1]);
-
   let first = true
   finalResult = finalResult.map((l) => {
     if (first) {
@@ -36,9 +31,7 @@ var justify = function(str, len) {
       return ' ' + l
     }
   })
-  
   return finalResult.join('\n');
-
 }
 
 var app = new Vue({
@@ -49,9 +42,7 @@ var app = new Vue({
     date: '',
     time: '',
     progress: 0,
-    stories: {},
-    subsetOfStories: {},
-    story: {}
+    stories: []
   },
   methods: {
     next: () => {
@@ -98,34 +89,28 @@ var app = new Vue({
   computed: {
     paddedPageStr: function() {
       return this.pageStr.padEnd(3, '_')
+    },
+    subsetOfStories: function() {
+      if (this.page < 101 || this. page >= 200) {
+        return []
+      }
+      const start = 10 * (this.page - 101)
+      return this.stories.slice(start, start + 10)
+    },
+    story: function() {
+      if (this.page.toString().length !== 3) {
+        return null
+      }
+      if (this.page >= 200) {
+        return this.stories[this.page - 200]
+      }
+      return null
     }
   },
   created() {
     window.addEventListener('keydown', async (e) => {
       app.key(e)
     });
-  },
-  watch: {
-    page: function() {
-      if (this.page.toString().length !== 3) {
-        return
-      }
-      this.subsetOfStories = {}
-      this.story = {}
-      if (this.page == 100) {
-        return
-      } 
-      if (this.page >= 200) {
-        this.story = this.stories[this.page]
-      } else {
-        const start = 200 + (this.page - 101) * 10
-        for(var i = start; i < start + 10; i++) {
-          this.subsetOfStories[i] = this.stories[i]
-          this.subsetOfStories[i].justified = justify(this.subsetOfStories[i].description, 39)
-          this.subsetOfStories[i].justifiedTitle = justify(this.subsetOfStories[i].title, 39)
-        }
-      }
-    }
   }
 })
 
@@ -160,7 +145,10 @@ const startup = async function() {
     story.url = story.link
     story.shorturl = story.link.substr(0, 20)
     story.time = story.pubDate
-    app.stories[id] = story
+    story.justified = justify(story.description, 39)
+    story.justifiedTitle = justify(story.title, 39)
+    story.id = id
+    app.stories.push(story)
     app.progress++
     id++
     if (id >= 300) {
