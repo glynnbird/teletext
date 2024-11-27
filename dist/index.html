@@ -40,7 +40,7 @@
   <span v-if="page>100 && page <= 110">
   &#xE2C0;
   <span v-for="story,id in subsetOfStories">
-    <span class="white greenbg">{{ id }}</span> <span class="yellow" v-if="story">{{ story.title.substr(0,35) }}</span>&#xE2C0;   
+    <a v-bind:href="'JavaScript:app.goto(' + id + ')'" class="white greenbg">{{ id }}</a> <span class="yellow" v-if="story">{{ story.title.substr(0,35) }}</span>&#xE2C0;   
   </span>
       &#xE2C0;
       <span v-if="page > 101"><a href="JavaScript:app.previous()" class="white greenbg">{{page - 1}}</a> Previous</span>
@@ -56,34 +56,34 @@
   <span v-if="story.title.length <= 38">&#xE2C0;
   </span>
   &#xE2C0;
-    <span class="green">{{ story.time }}</span>&#xE2C0;
-    &#xE2C0;
-    <span v-if="story.text">
-    <span class="white">{{ story.text.substr(0,36)}} </span>&#xE2C0;
-    </span>
-    <span v-if="story.text && story.text.length > 36">
-    <span class="white">{{ story.text.substr(36,36)}} </span>&#xE2C0;
-    </span>
-    <span v-if="story.text && story.text.length > 72">
-    <span class="white">{{ story.text.substr(72,36)}} </span>&#xE2C0;
-    </span>
-    <span v-if="story.text && story.text.length > 108">
-    <span class="white">{{ story.text.substr(108,36)}} </span>&#xE2C0;
-    </span>
-    <span v-if="story.text && story.text.length > 144">
-    <span class="white">{{ story.text.substr(144,36)}} </span>&#xE2C0;
-    </span>
-    <span v-if="story.text && story.text.length > 180">
-    <span class="white">{{ story.text.substr(180,36)}} </span>&#xE2C0;
-    </span>
-    <span v-if="story.url" class="white"><a v-bind:href="story.url" target="_new">{{ story.shorturl.substr(0,35) }} ===></a>&#xE2C0;</span>
+  <span class="green">{{ story.time }}</span>&#xE2C0;
+  &#xE2C0;
+  <span v-if="story.text">
+  <span class="white">{{ story.text.substr(0,36)}} </span>&#xE2C0;
+  </span>
+  <span v-if="story.text && story.text.length > 36">
+  <span class="white">{{ story.text.substr(36,36)}} </span>&#xE2C0;
+  </span>
+  <span v-if="story.text && story.text.length > 72">
+  <span class="white">{{ story.text.substr(72,36)}} </span>&#xE2C0;
+  </span>
+  <span v-if="story.text && story.text.length > 108">
+  <span class="white">{{ story.text.substr(108,36)}} </span>&#xE2C0;
+  </span>
+  <span v-if="story.text && story.text.length > 144">
+  <span class="white">{{ story.text.substr(144,36)}} </span>&#xE2C0;
+  </span>
+  <span v-if="story.text && story.text.length > 180">
+  <span class="white">{{ story.text.substr(180,36)}} </span>&#xE2C0;
+  </span>
 
-    &#xE2C0;
+  <span v-if="story.url" class="white"><a v-bind:href="story.url" target="_new">{{ story.shorturl.substr(0,35) }} ===></a>&#xE2C0;</span>
   &#xE2C0;
   &#xE2C0;
   &#xE2C0;
-  <span v-if="page > 200"><span class="white greenbg">{{page - 1}}</span> Previous</span>
-  <span v-if="page < 299"><span class="white greenbg">{{page + 1}}</span> Next</span>
+  &#xE2C0;
+  <span v-if="page > 200"><a href="JavaScript:app.previous()" class="white greenbg">{{page - 1}}</a> Previous</span>
+  <span v-if="page < 299"><a href="JavaScript:app.next()" class="white greenbg">{{page + 1}}</a> Next</span>
 
 
   </span>
