@@ -1,6 +1,6 @@
 # teletext
 
-A Vue.js app that renders Hacker News as a teletext service.
+A Vue.js app that renders RSS News as a teletext service.
 
 ![screenshot](screenshot.png)
 
