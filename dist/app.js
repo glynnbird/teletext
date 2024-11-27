@@ -1,5 +1,46 @@
 //var db = new PouchDB('teletext');
 
+var justify = function(str, len) {
+
+  var re = RegExp("(?:\\s|^)(.{1," + len + "})(?=\\s|$)", "g");
+  var res = [];
+  var finalResult = [];
+
+  while ((m = re.exec(str)) !== null) {
+    res.push(m[1]);
+  }
+
+  for (var i = 0; i < res.length - 1; i++){    
+    if(res[i].indexOf(' ') != -1){  
+      while(res[i].length < len){      
+        for(var j=0; j < res[i].length-1; j++){
+          if(res[i][j] == ' '){
+            res[i] = res[i].substring(0, j) + " " + res[i].substring(j);
+            if(res[i].length == len) break;
+            while(res[i][j] == ' ') j++;
+          }
+        }
+      }      
+    }    
+    finalResult.push(res[i]);    
+  }
+
+  finalResult.push(res[res.length - 1]);
+
+  let first = true
+  finalResult = finalResult.map((l) => {
+    if (first) {
+      first = false
+      return l
+    } else {
+      return ' ' + l
+    }
+  })
+  
+  return finalResult.join('\n');
+
+}
+
 var app = new Vue({
   el: '#app',
   data: {
@@ -80,6 +121,8 @@ var app = new Vue({
         const start = 200 + (this.page - 101) * 10
         for(var i = start; i < start + 10; i++) {
           this.subsetOfStories[i] = this.stories[i]
+          this.subsetOfStories[i].justified = justify(this.subsetOfStories[i].description, 39)
+          this.subsetOfStories[i].justifiedTitle = justify(this.subsetOfStories[i].title, 39)
         }
       }
     }
