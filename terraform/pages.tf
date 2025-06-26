@@ -4,27 +4,30 @@ resource "cloudflare_pages_project" "frontend_project" {
   name              = "teletext"
   production_branch = "main"
   
-  build_config {
+  build_config = {
     build_command       = "./build.sh"
     destination_dir     = "dist"
     root_dir            = "/"
   }
 
-  source {
+  source = {
     type = "github"
-    config {
+    config = {
       owner                         = "glynnbird"
       repo_name                     = "teletext"
       production_branch             = "main"
     }
   }
-    deployment_configs {
-      preview {
+    deployment_configs = {
+      preview = {
         
       }
-      production {
-        environment_variables = {
-          NODE_VERSION = "20"
+      production = {
+        env_vars = {
+          NODE_VERSION = {
+            type = "plain_text"
+            value = "22"
+          }
         }
       }
   }
@@ -33,10 +36,10 @@ resource "cloudflare_pages_project" "frontend_project" {
 resource "cloudflare_pages_domain" "frontend_domain" {
   account_id   = var.cloudflare_account_id
   project_name = cloudflare_pages_project.frontend_project.name
-  domain       = var.cloudflare_domain
+  name       = var.cloudflare_domain
 }
 
-resource "cloudflare_record" "frontend_dns" {
+resource "cloudflare_dns_record" "frontend_dns" {
   zone_id = var.cloudflare_zone_id
   name    = "teletext"
   content   = cloudflare_pages_project.frontend_project.subdomain
