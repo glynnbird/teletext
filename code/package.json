@@ -14,7 +14,7 @@
     "rollup": "^4.22.4"
   },
   "dependencies": {
-    "fast-xml-parser": "^4.5.0",
+    "fast-xml-parser": "^5.3.4",
     "string-strip-html": "^13.4.8"
   }
 }
