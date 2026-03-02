@@ -10,11 +10,10 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^29.0.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
-    "@rollup/plugin-terser": "^0.4.4",
-    "rollup": "^4.57.1"
+    "rollup": "^4.59.0"
   },
   "dependencies": {
-    "fast-xml-parser": "^5.3.6",
+    "fast-xml-parser": "^5.3.8",
     "string-strip-html": "^13.5.3"
   }
 }
